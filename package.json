@@ -2,7 +2,6 @@
   "name": "trello-clone",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "server:test": "cd server && npm run lint && npm run mocha",
     "server:lint": "cd server && eslint src/. test/. --config .eslintrc.json",
@@ -15,6 +14,6 @@
     "client:lint": "cd client && vue-cli-service lint"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Elliot 'noftaly' Maisl <elliot@maisl.fr>",
+  "license": "MIT"
 }
