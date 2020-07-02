@@ -13,9 +13,9 @@
   "author": "Elliot 'noftaly' Maisl <elliot@maisl.fr>",
   "scripts": {
     "test": "npm run lint && npm run mocha",
-    "lint": "eslint src/. test/. --config .eslintrc.json",
-    "dev": "nodemon src/",
-    "start": "node src/",
+    "lint": "eslint src/. test/. --config .eslintrc.js",
+    "dev": "nodemon --exec babel-node src/",
+    "start": "babel-node src/",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
@@ -40,6 +40,9 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
     "axios": "^0.19.2",
     "eslint": "^7.3.1",
     "eslint-config-noftalint": "^1.5.1",

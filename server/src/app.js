@@ -1,28 +1,24 @@
-const path = require('path');
-const favicon = require('serve-favicon');
-const compress = require('compression');
-const helmet = require('helmet');
-const cors = require('cors');
+import path from 'path';
 
-require('dotenv').config();
+import configuration from '@feathersjs/configuration';
+import express from '@feathersjs/express';
+import feathers from '@feathersjs/feathers';
+import socketio from '@feathersjs/socketio';
+import compress from 'compression';
+import cors from 'cors';
+import helmet from 'helmet';
+import favicon from 'serve-favicon';
 
-const logger = require('./logger');
+import appHooks from './app.hooks';
+import authentication from './authentication';
+import channels from './channels';
+import logger from './logger';
 
-const feathers = require('@feathersjs/feathers');
-const configuration = require('@feathersjs/configuration');
-const express = require('@feathersjs/express');
-const socketio = require('@feathersjs/socketio');
+import middleware from './middleware';
+import mongoose from './mongoose';
+import services from './services';
 
-
-const middleware = require('./middleware');
-const services = require('./services');
-const appHooks = require('./app.hooks');
-const channels = require('./channels');
-
-const authentication = require('./authentication');
-
-const mongoose = require('./mongoose');
-
+require('dotenv').config(); // eslint-disable-line import/no-commonjs
 
 const app = express(feathers());
 
@@ -58,4 +54,4 @@ app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
 
-module.exports = app;
+export default app;

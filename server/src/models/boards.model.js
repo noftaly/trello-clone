@@ -2,7 +2,7 @@
 //
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-module.exports = function (app) {
+export default function (app) {
   const modelName = 'boards';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
@@ -25,7 +25,7 @@ module.exports = function (app) {
       ref: 'users',
     }],
   }, {
-    timestamps: true
+    timestamps: true,
   });
 
   // This is necessary to avoid model compilation errors in watch mode
@@ -34,5 +34,4 @@ module.exports = function (app) {
     mongooseClient.deleteModel(modelName);
   }
   return mongooseClient.model(modelName, schema);
-
-};
+}

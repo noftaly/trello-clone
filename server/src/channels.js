@@ -1,20 +1,18 @@
-module.exports = function(app) {
-  if(typeof app.channel !== 'function') {
-    // If no real-time functionality has been configured just return
-    return;
-  }
+export default function (app) {
+  // If no real-time functionality has been configured just return
+  if (typeof app.channel !== 'function') return;
 
-  app.on('connection', connection => {
+  app.on('connection', (connection) => {
     // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
   });
 
-  app.on('login', (authResult, { connection }) => {
+  app.on('login', (_authResult, { connection }) => {
     // connection can be undefined if there is no
     // real-time connection, e.g. when logging in via REST
-    if(connection) {
+    if (connection) {
       // Obtain the logged in user from the connection
-      // const user = connection.user;
+      // const { user } = connection;
 
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
@@ -25,10 +23,10 @@ module.exports = function(app) {
       // Channels can be named anything and joined on any condition
 
       // E.g. to send real-time events only to admins use
-      // if(user.isAdmin) { app.channel('admins').join(connection); }
+      // if (user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
-      // if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
+      // if (Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
 
       // Easily organize users by email and userid for things like messaging
       // app.channel(`emails/${user.email}`).join(channel);
@@ -36,16 +34,13 @@ module.exports = function(app) {
     }
   });
 
-  // eslint-disable-next-line no-unused-vars
-  app.publish((data, hook) => {
-    // Here you can add event publishers to channels set up in `channels.js`
-    // To publish only for a specific event use `app.publish(eventname, () => {})`
+  // Inside the app.publish callback, you can add event publishers to channels set up in `channels.js`
+  // To publish only for a specific event use `app.publish(eventname, () => {})`
 
-    // console.log('Publishing all events to all authenticated users. See `channels.js` and https://docs.feathersjs.com/api/channels.html for more information.'); // eslint-disable-line
+  // console.log('Publishing all events to all authenticated users. See `channels.js` and https://docs.feathersjs.com/api/channels.html for more information.');
 
-    // e.g. to publish all service events to all authenticated users use
-    return app.channel('authenticated');
-  });
+  // e.g. to publish all service events to all authenticated users use
+  app.publish((_data, _hook) => app.channel('authenticated'));
 
   // Here you can also add service specific event publishers
   // e.g. the publish the `users` service `created` event to the `admins` channel
@@ -58,4 +53,4 @@ module.exports = function(app) {
   //     app.channel(`emails/${data.recipientEmail}`)
   //   ];
   // });
-};
+}
