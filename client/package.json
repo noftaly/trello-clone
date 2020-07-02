@@ -1,0 +1,57 @@
+{
+  "name": "trello-clone-client",
+  "description": "The frontend for our trello clone app",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src",
+  "keywords": [
+    "trello",
+    "trello clone",
+    "frontend",
+    "noftaly"
+  ],
+  "author": "Elliot 'noftaly' Maisl <elliot@maisl.fr>",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@feathersjs/authentication-client": "^4.5.4",
+    "@feathersjs/feathers": "^4.5.3",
+    "@feathersjs/socketio-client": "^4.5.4",
+    "@vue/composition-api": "^1.0.0-beta.1",
+    "core-js": "^3.6.5",
+    "feathers-hooks-common": "^5.0.3",
+    "feathers-vuex": "^3.11.5",
+    "socket.io-client": "^2.3.0",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuetify": "^2.2.11",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-router": "~4.4.0",
+    "@vue/cli-plugin-vuex": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^9.5.0",
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-vuetify": "~2.0.6",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.3.0"
+  },
+  "engines": {
+    "node": "^14.0.0",
+    "npm": ">= 3.0.0"
+  }
+}

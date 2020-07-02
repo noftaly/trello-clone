@@ -1,0 +1,56 @@
+{
+  "name": "trello-clone-server",
+  "description": "The backend for our trello clone app",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src",
+  "keywords": [
+    "trello",
+    "trello clone",
+    "backend",
+    "noftaly"
+  ],
+  "author": "Elliot 'noftaly' Maisl <elliot@maisl.fr>",
+  "scripts": {
+    "test": "npm run lint && npm run mocha",
+    "lint": "eslint src/. test/. --config .eslintrc.json",
+    "dev": "nodemon src/",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive --exit"
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^4.5.3",
+    "@feathersjs/authentication-local": "^4.5.4",
+    "@feathersjs/authentication-oauth": "^4.5.4",
+    "@feathersjs/configuration": "^4.5.3",
+    "@feathersjs/errors": "^4.5.3",
+    "@feathersjs/express": "^4.5.4",
+    "@feathersjs/feathers": "^4.5.3",
+    "@feathersjs/socketio": "^4.5.4",
+    "@feathersjs/transport-commons": "^4.5.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "feathers-authentication-hooks": "^1.0.2",
+    "feathers-mongoose": "^8.3.1",
+    "helmet": "^3.23.3",
+    "mongodb-core": "^3.2.7",
+    "mongoose": "^5.9.20",
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "eslint": "^7.3.1",
+    "eslint-config-noftalint": "^1.5.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-unicorn": "^20.1.0",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "^14.0.0",
+    "npm": ">= 3.0.0"
+  }
+}
