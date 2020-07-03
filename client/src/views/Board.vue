@@ -19,7 +19,11 @@
           v-for="list in lists"
           :key="list._id"
         >
-          <v-card max-width="400px">
+          <v-card
+            max-width="400px"
+            @dragover="setDroppingList($event, list)"
+            :class="{ 'green lighten-5': droppingList === list }"
+          >
             <v-card-title primary-title>
               <v-layout column>
                 <v-flex xs-12>
@@ -27,13 +31,18 @@
                 </v-flex>
 
                 <v-flex xs12 v-for="card in cardsByListId[list._id]" :key="card._id">
-                  <v-card class="my-1">
+                  <v-card
+                    class="my-1"
+                    draggable="true"
+                    @dragstart="startDraggingCard(card)"
+                    @dragend="dropCard()"
+                  >
                     <v-container>
-                      <v-latout row>
+                      <v-layout row>
                         <v-flex xs7>
                           <div>{{card.title}}</div>
                         </v-flex>
-                      </v-latout>
+                      </v-layout>
                     </v-container>
                   </v-card>
                 </v-flex>
@@ -91,6 +100,8 @@ export default {
     CreateCard,
   },
   data: () => ({
+    draggingCard: null,
+    droppingList: null,
     validList: false,
     board: {},
     list: {
@@ -120,6 +131,21 @@ export default {
           name: '',
         };
       }
+    },
+    startDraggingCard(card) {
+      this.draggingCard = card;
+    },
+    dropCard() {
+      if (this.droppingList) {
+        this.draggingCard.listId = this.droppingList._id;
+        this.draggingCard.save();
+      }
+      this.draggingCard = null;
+      this.droppingList = null;
+    },
+    setDroppingList(event, list) {
+      event.preventDefault();
+      this.droppingList = list;
     },
   },
   computed: {

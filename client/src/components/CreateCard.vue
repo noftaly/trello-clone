@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: 'create-card',
   props: ['listId', 'boardId'],
@@ -45,9 +43,6 @@ export default {
     },
     notEmptyRules: [(value) => !!value || 'Cannot be empty.'],
   }),
-  computed: {
-    ...mapState('cards', { creatingCard: 'isCreatePending' }),
-  },
   methods: {
     async createCard() {
       if (this.validCard) {
