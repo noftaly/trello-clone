@@ -8,8 +8,10 @@ describe('authentication', () => {
 
   describe('local strategy', () => {
     const userInfo = {
-      email: 'someone@example.com',
-      password: 'supersecret',
+      username: 'acoolusername',
+      password: 'asecretpassword',
+      displayName: 'coolname',
+      imageUrl: 'https://avatars3.githubusercontent.com/u/34779161?s=460&u=6bbbc0fac0f5ac6a1ed5146351e99a3756e8e74c&v=4',
     };
 
     before(async () => {

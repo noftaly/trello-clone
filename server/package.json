@@ -16,7 +16,7 @@
     "lint": "eslint src/. test/. --config .eslintrc.js",
     "dev": "nodemon --exec babel-node src/",
     "start": "babel-node src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "mocha": "mocha test/ --require esm --recursive --exit"
   },
   "dependencies": {
     "@feathersjs/authentication": "^4.5.3",
@@ -50,6 +50,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-unicorn": "^20.1.0",
+    "esm": "^3.2.25",
     "mocha": "^7.2.0",
     "nodemon": "^2.0.4"
   },
