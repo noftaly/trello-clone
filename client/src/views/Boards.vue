@@ -103,6 +103,7 @@ export default {
     ...mapGetters('auth', ['user']),
     ...mapGetters('boards', { findBoardsInStore: 'find' }),
     boards() {
+      if (!this.user) return [];
       return this.findBoardsInStore({ query: { ownerId: this.user._id } }).data;
     },
   },
