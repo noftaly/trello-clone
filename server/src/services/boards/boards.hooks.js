@@ -7,7 +7,7 @@ const setUserId = setField({
   from: 'params.user._id',
   as: 'data.ownerId',
 });
-const limitToUser = setField({
+const limitToOwner = setField({
   from: 'params.user._id',
   as: 'params.query.ownerId',
 });
@@ -15,12 +15,12 @@ const limitToUser = setField({
 export default {
   before: {
     all: [authenticate('jwt')],
-    find: [limitToUser],
-    get: [limitToUser],
+    find: [limitToOwner],
+    get: [limitToOwner],
     create: [setUserId],
-    update: [limitToUser],
-    patch: [limitToUser],
-    remove: [limitToUser],
+    update: [limitToOwner],
+    patch: [limitToOwner],
+    remove: [limitToOwner],
   },
 
   after: {
