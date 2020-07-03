@@ -1,10 +1,11 @@
 import { hooks } from '@feathersjs/authentication';
+import limitToBoardOwner from '../../hooks/authorization';
 
 const { authenticate } = hooks;
 
 export default {
   before: {
-    all: [authenticate('jwt')],
+    all: [authenticate('jwt'), limitToBoardOwner],
     find: [],
     get: [],
     create: [],
