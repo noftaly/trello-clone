@@ -1,7 +1,8 @@
 <template>
   <v-container fluid>
-    <v-layout column align-center>
+    <v-layout column>
       <h2 v-if="board">{{board.name}}</h2>
+
       <v-row class="d-flex">
         <v-progress-circular
           v-if="loadingBoard || loadingLists"
@@ -20,8 +21,28 @@
         >
           <v-card max-width="400px">
             <v-card-title primary-title>
-              <div class="headline">{{list.name}}</div>
+              <v-layout column>
+                <v-flex xs-12>
+                  <div class="headline">{{list.name}}</div>
+                </v-flex>
+
+                <v-flex xs12 v-for="card in cardsByListId[list._id]" :key="card._id">
+                  <v-card class="my-1">
+                    <v-container>
+                      <v-latout row>
+                        <v-flex xs7>
+                          <div>{{card.title}}</div>
+                        </v-flex>
+                      </v-latout>
+                    </v-container>
+                  </v-card>
+                </v-flex>
+              </v-layout>
             </v-card-title>
+
+            <v-card-actions>
+              <create-card :listId="list._id" :boardId="$route.params.id"></create-card>
+            </v-card-actions>
           </v-card>
         </v-flex>
 
@@ -62,9 +83,13 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
+import CreateCard from '../components/CreateCard';
 
 export default {
   name: 'board',
+  components: {
+    CreateCard,
+  },
   data: () => ({
     validList: false,
     board: {},
@@ -76,11 +101,15 @@ export default {
   async mounted() {
     const boardResponse = await this.getBoard(this.$route.params.id);
     this.board = boardResponse.data || boardResponse;
+
     await this.findLists({ query: { boardId: this.$route.params.id } });
+
+    await this.findCards({ query: { boardId: this.$route.params.id } });
   },
   methods: {
     ...mapActions('boards', { getBoard: 'get' }),
     ...mapActions('lists', { findLists: 'find' }),
+    ...mapActions('cards', { findCards: 'find' }),
     async createList() {
       if (this.validList) {
         const { List } = this.$FeathersVuex.api;
@@ -97,8 +126,19 @@ export default {
     ...mapState('boards', { loadingBoard: 'isGetPending' }),
     ...mapState('lists', { loadingLists: 'isFindPending', creatingList: 'isCreatePending' }),
     ...mapGetters('lists', { findListsInStore: 'find' }),
+    ...mapGetters('cards', { findCardsInStore: 'find' }),
     lists() {
       return this.findListsInStore({ query: { boardId: this.$route.params.id } }).data;
+    },
+    cards() {
+      return this.findCardsInStore({ query: { boardId: this.$route.params.id } }).data;
+    },
+    cardsByListId() {
+      return this.cards.reduce((byId, card) => {
+        byId[card.listId] = byId[card.listId] || [];
+        byId[card.listId].push(card);
+        return byId;
+      }, {});
     },
   },
 };
