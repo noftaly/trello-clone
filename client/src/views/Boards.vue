@@ -82,9 +82,7 @@ export default {
     notEmptyRules: [(value) => !!value || 'Cannot be empty.'],
   }),
   async mounted() {
-    await this.findBoards({ query: {} });
-    // const response = await this.findBoards({ query: {} });
-    // const boards = response.data || response;
+    await this.findBoards({});
   },
   methods: {
     ...mapActions('boards', { findBoards: 'find' }),
@@ -102,9 +100,10 @@ export default {
   },
   computed: {
     ...mapState('boards', { loading: 'isFindPending', creating: 'isCreatePending' }),
+    ...mapGetters('auth', ['user']),
     ...mapGetters('boards', { findBoardsInStore: 'find' }),
     boards() {
-      return this.findBoardsInStore({ query: {} }).data;
+      return this.findBoardsInStore({ query: { ownerId: this.user._id } }).data;
     },
   },
 };
