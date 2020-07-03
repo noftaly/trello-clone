@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title>
+      <v-btn :to="{ name: 'home' }">
         Noftaly's Trello
-      </v-toolbar-title>
+      </v-btn>
 
       <v-spacer></v-spacer>
 

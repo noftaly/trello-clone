@@ -11,7 +11,6 @@ import store from '../store';
 Vue.use(VueRouter);
 
 function isLoggedIn(_to, _from, next) {
-  // Before going to '/', try to authenticate automatically
   store.dispatch('auth/authenticate')
     .then(() => next())
     .catch(() => next('/login'));
@@ -20,7 +19,7 @@ function isLoggedIn(_to, _from, next) {
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home,
     beforeEnter(_to, _from, next) {
       // Before going to '/', try to authenticate automatically
