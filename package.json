@@ -4,10 +4,10 @@
   "description": "",
   "scripts": {
     "server:test": "cd server && npm run lint && npm run mocha",
-    "server:lint": "cd server && eslint src/. test/. --config .eslintrc.json",
+    "server:lint": "cd server && eslint src/. test/. --config .eslintrc.js",
     "server:dev": "cd server && nodemon src/",
     "server:start": "cd server && node src/",
-    "server:mocha": "cd server && mocha test/ --recursive --exit",
+    "server:mocha": "cd server && mocha test/ --require esm --recursive --exit",
 
     "client:serve": "cd client && vue-cli-service serve",
     "client:build": "cd client && vue-cli-service build",
