@@ -50,8 +50,8 @@ export default {
   props: {
     list: { type: Object, required: true },
     setDroppingList: { type: Function, required: true },
-    droppingList: { type: Object, required: true },
-    cardsByListId: { type: Array, required: true },
+    droppingList: Object,
+    cardsByListId: { type: Object, required: true },
     startDraggingCard: { type: Function, required: true },
     dropCard: { type: Function, required: true },
     user: { type: Object, required: true },
