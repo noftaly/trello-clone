@@ -22,20 +22,20 @@
         ></v-text-field>
         <v-btn type="submit" :disabled="!valid">Login</v-btn>
       </v-form>
-      <themed-progress v-else></themed-progress>
+      <app-progress v-else></app-progress>
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import ThemedProgress from '@/components/ThemedProgress';
+import AppProgress from '@/components/AppProgress';
 import { notEmptyRules } from '@/validators';
 
 export default {
   name: 'Login',
   components: {
-    ThemedProgress,
+    AppProgress,
   },
   data: () => ({
     valid: false,

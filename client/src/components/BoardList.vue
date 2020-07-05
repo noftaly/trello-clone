@@ -30,18 +30,18 @@
     </v-card-title>
 
     <v-card-actions>
-      <new-card-form
+      <board-new-card-form
         :createActivity="createActivity"
         :listId="list._id"
         :boardId="$route.params.id"
         :user="user"
-      ></new-card-form>
+      ></board-new-card-form>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import NewCardForm from '@/components/NewCardForm';
+import BoardNewCardForm from '@/components/BoardNewCardForm';
 
 export default {
   props: [
@@ -55,7 +55,7 @@ export default {
     'createActivity',
   ],
   components: {
-    NewCardForm,
+    BoardNewCardForm,
   },
 };
 </script>

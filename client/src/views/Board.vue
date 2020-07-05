@@ -5,14 +5,14 @@
         <h2 class="text-center" v-if="board">{{board.name}}</h2>
 
         <v-row class="d-flex ml-5">
-          <themed-progress v-if="loadingBoard || loadingLists"></themed-progress>
+          <app-progress v-if="loadingBoard || loadingLists"></app-progress>
 
           <v-flex xs12 mx-3 v-if="listsError">
             <v-alert type="error">{{listsError.message}}</v-alert>
           </v-flex>
 
           <v-flex xs12 v-else>
-            <themed-progress v-if="loadingBoard || loadingLists"></themed-progress>
+            <app-progress v-if="loadingBoard || loadingLists"></app-progress>
 
             <v-row v-else>
               <v-flex
@@ -32,7 +32,10 @@
                 ></board-list>
               </v-flex>
 
-              <new-list-form :creatingList="creatingList" :createList="createList"></new-list-form>
+              <board-new-list-form
+                :creatingList="creatingList"
+                :createList="createList"
+              ></board-new-list-form>
             </v-row>
           </v-flex>
         </v-row>
@@ -52,16 +55,16 @@ import {
   mapGetters,
   mapMutations,
 } from 'vuex';
-import NewListForm from '@/components/NewListForm';
-import ThemedProgress from '@/components/ThemedProgress';
+import BoardNewListForm from '@/components/BoardNewListForm';
+import AppProgress from '@/components/AppProgress';
 import BoardActivities from '@/components/BoardActivities';
 import BoardList from '@/components/BoardList';
 
 export default {
   name: 'board',
   components: {
-    NewListForm,
-    ThemedProgress,
+    BoardNewListForm,
+    AppProgress,
     BoardActivities,
     BoardList,
   },

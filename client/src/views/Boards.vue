@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout column align-center>
       <v-row class="d-flex">
-        <themed-progress v-if="loading"></themed-progress>
+        <app-progress v-if="loading"></app-progress>
 
         <v-flex
           v-else
@@ -13,10 +13,10 @@
           <board-card :board="board"></board-card>
         </v-flex>
 
-        <new-board-form
+        <boards-new-board-form
           :creating="creating"
           :createBoard="createBoard"
-        ></new-board-form>
+        ></boards-new-board-form>
       </v-row>
     </v-layout>
   </v-container>
@@ -24,15 +24,15 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
-import ThemedProgress from '@/components/ThemedProgress';
-import NewBoardForm from '@/components/NewBoardForm';
+import AppProgress from '@/components/AppProgress';
+import BoardsNewBoardForm from '@/components/BoardsNewBoardForm';
 import BoardCard from '@/components/BoardCard';
 
 export default {
   name: 'boards',
   components: {
-    ThemedProgress,
-    NewBoardForm,
+    AppProgress,
+    BoardsNewBoardForm,
     BoardCard,
   },
   async mounted() {

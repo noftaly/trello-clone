@@ -18,7 +18,7 @@
             ></v-text-field>
             <v-btn type="submit" :disabled="!validList">Create List</v-btn>
           </v-form>
-          <themed-progress v-else></themed-progress>
+          <app-progress v-else></app-progress>
         </div>
       </v-card-title>
     </v-card>
@@ -27,12 +27,12 @@
 
 <script>
 import { notEmptyRules } from '@/validators';
-import ThemedProgress from '@/components/ThemedProgress';
+import AppProgress from '@/components/AppProgress';
 
 export default {
   props: ['creatingList', 'createList'],
   components: {
-    ThemedProgress,
+    AppProgress,
   },
   data: () => ({
     validList: false,

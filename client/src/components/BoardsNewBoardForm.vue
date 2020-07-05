@@ -24,7 +24,7 @@
             ></v-text-field>
             <v-btn type="submit" :disabled="!valid">Create</v-btn>
           </v-form>
-          <themed-progress v-else></themed-progress>
+          <app-progress v-else></app-progress>
         </div>
       </v-card-title>
     </v-card>
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import ThemedProgress from '@/components/ThemedProgress';
+import AppProgress from '@/components/AppProgress';
 import { notEmptyRules } from '@/validators';
 
 export default {
   props: ['creating', 'createBoard'],
   components: {
-    ThemedProgress,
+    AppProgress,
   },
   data: () => ({
     valid: false,
