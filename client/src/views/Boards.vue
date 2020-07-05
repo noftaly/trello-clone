@@ -2,67 +2,21 @@
   <v-container fluid>
     <v-layout column align-center>
       <v-row class="d-flex">
-        <v-progress-circular
-          v-if="loading"
-          :size="70"
-          :width="7"
-          color="primary"
-          indeterminate
-        ></v-progress-circular>
+        <themed-progress v-if="loading"></themed-progress>
+
         <v-flex
           v-else
-          sm3
-          class="mx-4 my-4"
+          class="sm3 mx-4 my-4"
           v-for="board in boards"
           :key="board._id"
         >
-          <v-card max-width="400px">
-            <v-img height="200px" :src="board.background"></v-img>
-            <v-card-title primary-title>
-              <div class="headline">{{board.name}}</div>
-            </v-card-title>
-            <v-card-actions>
-              <v-btn :to="{ name: 'board', params: { id: board._id } }" color="primary">Go</v-btn>
-            </v-card-actions>
-          </v-card>
+          <board-card :board="board"></board-card>
         </v-flex>
 
-        <v-flex sm3 class="mx-4 my-4">
-          <v-card max-width="400px">
-            <v-card-title primary-title style="flex-direction: column;">
-              <div class="headline">Create Board</div>
-              <div>
-                <v-form
-                  v-if="!creating"
-                  v-model="valid"
-                  @submit.prevent="createBoard()"
-                  @keydown.prevent.enter
-                >
-                  <v-text-field
-                    v-model="board.name"
-                    :rules="notEmptyRules"
-                    label="Name"
-                    required
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="board.background"
-                    :rules="notEmptyRules"
-                    label="Background"
-                    required
-                  ></v-text-field>
-                  <v-btn type="submit" :disabled="!valid">Create</v-btn>
-                </v-form>
-                <v-progress-circular
-                  v-else
-                  :size="70"
-                  :width="7"
-                  color="primary"
-                  indeterminate
-                ></v-progress-circular>
-              </div>
-            </v-card-title>
-          </v-card>
-        </v-flex>
+        <new-board-form
+          :creating="creating"
+          :createBoard="createBoard"
+        ></new-board-form>
       </v-row>
     </v-layout>
   </v-container>
@@ -70,32 +24,26 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
+import ThemedProgress from '@/components/ThemedProgress';
+import NewBoardForm from '@/components/NewBoardForm';
+import BoardCard from '@/components/BoardCard';
 
 export default {
   name: 'boards',
-  data: () => ({
-    valid: false,
-    board: {
-      name: '',
-      background: '',
-    },
-    notEmptyRules: [(value) => !!value || 'Cannot be empty.'],
-  }),
+  components: {
+    ThemedProgress,
+    NewBoardForm,
+    BoardCard,
+  },
   async mounted() {
     await this.findBoards({});
   },
   methods: {
     ...mapActions('boards', { findBoards: 'find' }),
-    async createBoard() {
-      if (this.valid) {
-        const { Board } = this.$FeathersVuex.api;
-        const board = new Board(this.board);
-        await board.save();
-        this.board = {
-          name: '',
-          background: '',
-        };
-      }
+    async createBoard(board) {
+      const { Board } = this.$FeathersVuex.api;
+      const newBoard = new Board(board);
+      await newBoard.save();
     },
   },
   computed: {

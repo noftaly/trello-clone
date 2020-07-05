@@ -3,6 +3,9 @@ import Vuex from 'vuex';
 import { FeathersVuex } from '../feathers-client';
 import auth from './store.auth';
 
+import localAuth from './modules/localAuth';
+import board from './modules/board';
+
 Vue.use(Vuex);
 Vue.use(FeathersVuex);
 
@@ -23,4 +26,5 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   plugins: [...servicePlugins, auth],
+  modules: { localAuth, board },
 });

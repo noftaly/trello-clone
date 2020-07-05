@@ -4,7 +4,7 @@
       <v-form
         v-if="!loading"
         v-model="valid"
-        @submit.prevent="signUp()"
+        @submit.prevent="signUp({ valid, user, router: $router })"
         @keydown.prevent.enter
       >
         <v-text-field
@@ -41,22 +41,21 @@
         ></v-text-field>
         <v-btn type="submit" :disabled="!valid">Sign Up</v-btn>
       </v-form>
-      <v-progress-circular
-        v-else
-        :size="70"
-        :width="7"
-        color="primary"
-        indeterminate
-      ></v-progress-circular>
+      <themed-progress v-else></themed-progress>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import ThemedProgress from '@/components/ThemedProgress';
+import { notEmptyRules } from '@/validators';
 
 export default {
   name: 'SignUp',
+  components: {
+    ThemedProgress,
+  },
   data: (vm) => ({
     valid: false,
     user: {
@@ -66,21 +65,14 @@ export default {
       displayName: '',
       imageUrl: '',
     },
-    notEmptyRules: [(value) => !!value || 'Cannot be empty.'],
+    notEmptyRules,
     confirmPasswordRules: [(confirmPwd) => confirmPwd === vm.user.password || 'Passwords must match.'],
   }),
   computed: {
     ...mapState('users', { loading: 'isCreatePending' }),
   },
   methods: {
-    async signUp() {
-      if (this.valid) {
-        const { User } = this.$FeathersVuex.api;
-        const user = new User(this.user);
-        await user.save();
-        this.$router.push('/login');
-      }
-    },
+    ...mapActions('localAuth', ['signUp']),
   },
 };
 </script>

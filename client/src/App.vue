@@ -1,26 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-btn :to="{ name: 'home' }">
-        Noftaly's Trello
-      </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <div v-if="!user">
-        <v-btn :to="{ name: 'login' }">Login</v-btn>
-        <v-btn :to="{ name: 'signup' }">Sign up</v-btn>
-      </div>
-      <v-toolbar-items v-else>
-        <v-layout justify-content align-center class="mr-4">
-          <h3 class="mr-2">{{user.displayName}}</h3>
-          <v-avatar :size="40" color="grey lighten-4" >
-            <img :src="user.imageUrl" alt="avatar">
-          </v-avatar>
-        </v-layout>
-        <v-btn text @click="logout()">Logout</v-btn>
-      </v-toolbar-items>
-    </v-app-bar>
+    <app-navbar :user="user" :logout="logout"></app-navbar>
 
     <v-main>
       <router-view />
@@ -30,9 +10,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import AppNavbar from '@/components/AppNavbar';
 
 export default {
   name: 'App',
+  components: {
+    AppNavbar,
+  },
   computed: {
     ...mapGetters('auth', ['user']),
   },
