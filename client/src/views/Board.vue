@@ -42,7 +42,7 @@
       </v-flex>
 
       <v-flex xs2>
-        <board-activities-sidebar :activitiesByDate="activitiesByDate"></board-activities-sidebar>
+        <board-sidebar :activitiesByDate="activitiesByDate"></board-sidebar>
       </v-flex>
     </v-layout>
   </v-container>
@@ -57,7 +57,7 @@ import {
 } from 'vuex';
 import BoardNewListForm from '@/components/BoardNewListForm';
 import AppProgress from '@/components/AppProgress';
-import BoardActivitiesSidebar from '@/components/BoardActivitiesSidebar';
+import BoardSidebar from '@/components/BoardSidebar';
 import BoardList from '@/components/BoardList';
 
 export default {
@@ -65,7 +65,7 @@ export default {
   components: {
     BoardNewListForm,
     AppProgress,
-    BoardActivitiesSidebar,
+    BoardSidebar,
     BoardList,
   },
   data: () => ({
