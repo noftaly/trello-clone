@@ -32,16 +32,23 @@
 </template>
 
 <script>
+import { notEmptyRules } from '@/validators';
+
 export default {
   name: 'create-card',
-  props: ['listId', 'boardId', 'createActivity', 'user'],
+  props: {
+    listId: { type: String, required: true },
+    boardId: { type: String, required: true },
+    createActivity: { type: Function, required: true },
+    user: { type: Object, required: true },
+  },
   data: () => ({
     creatingCard: false,
     validCard: false,
     card: {
       title: '',
     },
-    notEmptyRules: [(value) => !!value || 'Cannot be empty.'],
+    notEmptyRules,
   }),
   methods: {
     async createCard() {

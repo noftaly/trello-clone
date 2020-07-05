@@ -12,6 +12,8 @@
 
 <script>
 export default {
-  props: ['board'],
+  props: {
+    board: { type: Object, required: true },
+  },
 };
 </script>

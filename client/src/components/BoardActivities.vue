@@ -26,7 +26,9 @@ import marked from 'marked';
 import UserAvatar from '@/components/UserAvatar';
 
 export default {
-  props: ['activitiesByDate'],
+  props: {
+    activitiesByDate: { type: Array, required: true },
+  },
   components: {
     UserAvatar,
   },

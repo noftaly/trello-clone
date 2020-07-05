@@ -27,6 +27,9 @@ export default {
   components: {
     UserAvatar,
   },
-  props: ['user', 'logout'],
+  props: {
+    user: { type: String, required: true },
+    logout: { type: Function, required: true },
+  },
 };
 </script>

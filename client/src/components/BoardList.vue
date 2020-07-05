@@ -44,16 +44,16 @@
 import BoardNewCardForm from '@/components/BoardNewCardForm';
 
 export default {
-  props: [
-    'list',
-    'setDroppingList',
-    'droppingList',
-    'cardsByListId',
-    'startDraggingCard',
-    'dropCard',
-    'user',
-    'createActivity',
-  ],
+  props: {
+    list: { type: Object, required: true },
+    setDroppingList: { type: Function, required: true },
+    droppingList: { type: Object, required: true },
+    cardsByListId: { type: Array, required: true },
+    startDraggingCard: { type: Function, required: true },
+    dropCard: { type: Function, required: true },
+    user: { type: Object, required: true },
+    createActivity: { type: Function, required: true },
+  },
   components: {
     BoardNewCardForm,
   },

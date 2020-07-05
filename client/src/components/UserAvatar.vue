@@ -6,6 +6,8 @@
 
 <script>
 export default {
-  props: ['imageUrl'],
+  props: {
+    imageUrl: { type: String, required: true },
+  },
 };
 </script>
