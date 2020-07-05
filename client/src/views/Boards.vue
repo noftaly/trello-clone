@@ -10,7 +10,7 @@
           v-for="board in boards"
           :key="board._id"
         >
-          <board-card :board="board"></board-card>
+          <board-list-card :board="board"></board-list-card>
         </v-flex>
 
         <boards-new-board-form
@@ -26,14 +26,14 @@
 import { mapActions, mapState, mapGetters } from 'vuex';
 import AppProgress from '@/components/AppProgress';
 import BoardsNewBoardForm from '@/components/BoardsNewBoardForm';
-import BoardCard from '@/components/BoardCard';
+import BoardListCard from '@/components/BoardListCard';
 
 export default {
   name: 'boards',
   components: {
     AppProgress,
     BoardsNewBoardForm,
-    BoardCard,
+    BoardListCard,
   },
   async mounted() {
     await this.findBoards({});
