@@ -36,12 +36,12 @@ import AppProgress from '@/components/AppProgress';
 import { notEmptyRules } from '@/validators';
 
 export default {
+  components: {
+    AppProgress,
+  },
   props: {
     creating: { type: Boolean, required: true },
     createBoard: { type: Function, required: true },
-  },
-  components: {
-    AppProgress,
   },
   data: () => ({
     valid: false,

@@ -26,11 +26,11 @@ import marked from 'marked';
 import UserAvatar from '@/components/UserAvatar';
 
 export default {
-  props: {
-    activitiesByDate: { type: Array, required: true },
-  },
   components: {
     UserAvatar,
+  },
+  props: {
+    activitiesByDate: { type: Array, required: true },
   },
   methods: {
     markdownify(text) {

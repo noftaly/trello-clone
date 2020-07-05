@@ -44,6 +44,9 @@
 import BoardNewCardForm from '@/components/BoardNewCardForm';
 
 export default {
+  components: {
+    BoardNewCardForm,
+  },
   props: {
     list: { type: Object, required: true },
     setDroppingList: { type: Function, required: true },
@@ -53,9 +56,6 @@ export default {
     dropCard: { type: Function, required: true },
     user: { type: Object, required: true },
     createActivity: { type: Function, required: true },
-  },
-  components: {
-    BoardNewCardForm,
   },
 };
 </script>

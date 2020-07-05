@@ -71,6 +71,34 @@ export default {
   data: () => ({
     board: {},
   }),
+  computed: {
+    ...mapState('board', ['droppingList', 'draggingCard']),
+    ...mapState('boards', { loadingBoard: 'isGetPending' }),
+    ...mapState('lists', { loadingLists: 'isFindPending', creatingList: 'isCreatePending', listsError: 'errorOnFind' }),
+    ...mapGetters('auth', ['user']),
+    ...mapGetters('lists', { findListsInStore: 'find' }),
+    ...mapGetters('cards', { findCardsInStore: 'find' }),
+    ...mapGetters('activities', { findActivitiesInStore: 'find' }),
+    activities() {
+      return this.findActivitiesInStore({ query: { boardId: this.$route.params.id } }).data;
+    },
+    lists() {
+      return this.findListsInStore({ query: { boardId: this.$route.params.id } }).data;
+    },
+    cards() {
+      return this.findCardsInStore({ query: { boardId: this.$route.params.id } }).data;
+    },
+    cardsByListId() {
+      return this.cards.reduce((byId, card) => {
+        byId[card.listId] = byId[card.listId] || [];
+        byId[card.listId].push(card);
+        return byId;
+      }, {});
+    },
+    activitiesByDate() {
+      return this.activities.slice().reverse();
+    },
+  },
   async mounted() {
     const boardId = this.$route.params.id;
     const boardResponse = await this.getBoard(boardId);
@@ -117,34 +145,6 @@ export default {
     onSetDroppingList(event, list) {
       event.preventDefault();
       this.setDroppingList(list);
-    },
-  },
-  computed: {
-    ...mapState('board', ['droppingList', 'draggingCard']),
-    ...mapState('boards', { loadingBoard: 'isGetPending' }),
-    ...mapState('lists', { loadingLists: 'isFindPending', creatingList: 'isCreatePending', listsError: 'errorOnFind' }),
-    ...mapGetters('auth', ['user']),
-    ...mapGetters('lists', { findListsInStore: 'find' }),
-    ...mapGetters('cards', { findCardsInStore: 'find' }),
-    ...mapGetters('activities', { findActivitiesInStore: 'find' }),
-    activities() {
-      return this.findActivitiesInStore({ query: { boardId: this.$route.params.id } }).data;
-    },
-    lists() {
-      return this.findListsInStore({ query: { boardId: this.$route.params.id } }).data;
-    },
-    cards() {
-      return this.findCardsInStore({ query: { boardId: this.$route.params.id } }).data;
-    },
-    cardsByListId() {
-      return this.cards.reduce((byId, card) => {
-        byId[card.listId] = byId[card.listId] || [];
-        byId[card.listId].push(card);
-        return byId;
-      }, {});
-    },
-    activitiesByDate() {
-      return this.activities.slice().reverse();
     },
   },
 };

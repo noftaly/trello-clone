@@ -35,6 +35,15 @@ export default {
     BoardsNewBoardForm,
     BoardListCard,
   },
+  computed: {
+    ...mapState('boards', { loading: 'isFindPending', creating: 'isCreatePending' }),
+    ...mapGetters('auth', ['user']),
+    ...mapGetters('boards', { findBoardsInStore: 'find' }),
+    boards() {
+      if (!this.user) return [];
+      return this.findBoardsInStore({ query: { ownerId: this.user._id } }).data;
+    },
+  },
   async mounted() {
     await this.findBoards({});
   },
@@ -44,15 +53,6 @@ export default {
       const { Board } = this.$FeathersVuex.api;
       const newBoard = new Board(board);
       await newBoard.save();
-    },
-  },
-  computed: {
-    ...mapState('boards', { loading: 'isFindPending', creating: 'isCreatePending' }),
-    ...mapGetters('auth', ['user']),
-    ...mapGetters('boards', { findBoardsInStore: 'find' }),
-    boards() {
-      if (!this.user) return [];
-      return this.findBoardsInStore({ query: { ownerId: this.user._id } }).data;
     },
   },
 };
