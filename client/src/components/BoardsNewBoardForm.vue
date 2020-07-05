@@ -36,6 +36,7 @@ import AppProgress from '@/components/AppProgress';
 import { notEmptyRules } from '@/validators';
 
 export default {
+  name: 'BoardNewBoardForm',
   components: {
     AppProgress,
   },

@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: 'BoardListCard',
   props: {
     board: { type: Object, required: true },
   },

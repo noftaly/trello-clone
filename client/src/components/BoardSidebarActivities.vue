@@ -20,6 +20,7 @@ import marked from 'marked';
 import UserAvatar from '@/components/UserAvatar';
 
 export default {
+  name: 'BoardSidebarActivities',
   components: {
     UserAvatar,
   },

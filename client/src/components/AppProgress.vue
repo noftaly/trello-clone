@@ -6,3 +6,9 @@
     indeterminate
   ></v-progress-circular>
 </template>
+
+<script>
+export default {
+  name: 'AppProgress',
+};
+</script>

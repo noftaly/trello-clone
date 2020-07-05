@@ -24,6 +24,7 @@
 import UserAvatar from '@/components/UserAvatar';
 
 export default {
+  name: 'AppNavbar',
   components: {
     UserAvatar,
   },

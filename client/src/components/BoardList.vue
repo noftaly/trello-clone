@@ -44,6 +44,7 @@
 import BoardNewCardForm from '@/components/BoardNewCardForm';
 
 export default {
+  name: 'BoardList',
   components: {
     BoardNewCardForm,
   },

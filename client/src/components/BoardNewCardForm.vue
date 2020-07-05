@@ -35,7 +35,7 @@
 import { notEmptyRules } from '@/validators';
 
 export default {
-  name: 'create-card',
+  name: 'BoardNewCardForm',
   props: {
     listId: { type: String, required: true },
     boardId: { type: String, required: true },

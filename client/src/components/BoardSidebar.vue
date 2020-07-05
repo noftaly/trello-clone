@@ -22,6 +22,7 @@ import BoardSidebarActivities from '@/components/BoardSidebarActivities';
 import BoardSidebarSettings from '@/components/BoardSidebarSettings';
 
 export default {
+  name: 'BoardSidebar',
   components: {
     BoardSidebarActivities,
     BoardSidebarSettings,

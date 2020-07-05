@@ -30,6 +30,7 @@ import { notEmptyRules } from '@/validators';
 import AppProgress from '@/components/AppProgress';
 
 export default {
+  name: 'BoardNewListForm',
   components: {
     AppProgress,
   },

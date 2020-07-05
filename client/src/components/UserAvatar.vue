@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'UserAvatar',
   props: {
     imageUrl: { type: String, required: true },
   },

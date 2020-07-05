@@ -6,6 +6,7 @@
 import AppProgress from '@/components/AppProgress';
 
 export default {
+  name: 'BoardSidebarSettings',
   components: {
     AppProgress,
   },
